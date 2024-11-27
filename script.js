@@ -1,6 +1,7 @@
 const buttonContainer = document.getElementById("buttonContainer")
 const buttonValider = document.getElementById("buttonValider")
-const afficheNomDeRecette = document.getElementById("recette")
+const afficheNomDeRecette = document.getElementById("nomDeRecette")
+const afficheImages = document.getElementById("images")
 let selectedIngredient = new Set()
 
 let listeIngredients = ["carrots", "tomatoes", "steaks", "spagettis","potatoes", 
@@ -20,25 +21,35 @@ listeIngredients.forEach(ingredient => {
         console.log(Array.from(selectedIngredient))
     }) 
 })
+async function displayRecipes (url){
+    const recipesReponse = await fetch(url)
+    const recipesResult = await recipesReponse.json()
+    //afficheNomDeRecette.innerHTML = recipesResult[0].title
+    console.log(recipesResult)
+    for ( let index = 0; index < recipesResult.length; index++){
+        let NomDeRecette = document.createElement('h3')
+        NomDeRecette.innerHTML = recipesResult[index].title
+        afficheNomDeRecette.appendChild(NomDeRecette)
+    }
+    //afficheNomDeRecette.innerHTML = recipesResult[0].title
+    //console.log(result[0].missedIngredients[0])
+}
 buttonValider.addEventListener("click",() => {
+    // on masque le première page 
+    document.getElementById("ingredientsPage").style.display ="none"
+    document.getElementById("recipesPage").style.display="flex"
+
     const selectedArray = Array.from(selectedIngredient); // Convertit le Set en tableau
-    console.log("Ingrédients choisis :", selectedArray)
+    //console.log("Ingrédients choisis :", selectedArray)
     const ingredientsGroupe = selectedArray.map((ingredient) => encodeURIComponent(ingredient)).join(",")
     console.log("ingredient regroupée:",ingredientsGroupe)
     console.log(remplaceIngredient(ingredientsGroupe))
-    displayRecipes(remplaceIngredient(ingredientsGroupe))   
+    displayRecipes(remplaceIngredient(ingredientsGroupe)) 
+    document.getElementById('texte').innerText = "Voici les plats possibles avec vos ingrédients"
+    //afficheNomDeRecette.innerHTML = recipesResult[0].title
 })
-async function displayRecipes (url){
-    const reponse = await fetch(url)
-    const result = await reponse.json()
-    afficheNomDeRecette.innerHTML = result[0].title
-    afficheNomDeRecette.innerHTML += "<img src = result[0].image />"
-    console.log(result)
-    //console.log(result[0].missedIngredients[0])
-}
-//displayRecipes()
-function remplaceIngredient(ingredientsGroupé){
-    return  `https://api.spoonacular.com/recipes/findByIngredients?ingredients=${ingredientsGroupé}&number=10&limitLicense=true&ranking=1&ignorePantry=false&apiKey=04aeff9c7aa54db4add1b4bf65923c49`
+function remplaceIngredient(ingredientsChoisi){
+    return  `https://api.spoonacular.com/recipes/findByIngredients?ingredients=${ingredientsChoisi}&number=10&limitLicense=true&ranking=1&ignorePantry=false&apiKey=04aeff9c7aa54db4add1b4bf65923c49`
 }
 
-console.log(remplaceIngredient()) 
+//console.log(remplaceIngredient()) 
