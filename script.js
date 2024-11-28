@@ -5,7 +5,7 @@ const buttonNouvelleRecette = document.getElementById("nouvelleRecette")
 let selectedIngredient = new Set()
 
 let listeIngredients = ["carrots", "tomatoes", "steaks", "spagettis","potatoes", 
-    "fish", "butter", "egg york","Brocoli","olives","flour","cucumber"]
+    "fish", "butter", "egg york","broccoli","olives","flour","cucumber"]
 listeIngredients.forEach(ingredient => {
     const optionIngredient = document.createElement('button')
     optionIngredient.innerHTML = `<p> ${ingredient} </p>`
@@ -22,15 +22,14 @@ listeIngredients.forEach(ingredient => {
     }) 
 })
 let recipesResult = ""
-async function displayRecipes (url){
+async function displayRecipes (url,index){
     const recipesReponse = await fetch(url)
     recipesResult = await recipesReponse.json()
     //console.log(recipesResult)
-
     afficheNomDeRecette.innerHTML=""
     //recipesResult.forEach(ingredient => {
     //let indexDeTrois = recipesResult.length/4
-    for (let i = 0; i < 3; i++){
+    for (let i = 0; i < index; i++){
         const recipeElement = document.createElement('div')
         recipeElement.innerHTML =
         `<button>
@@ -40,6 +39,7 @@ async function displayRecipes (url){
     afficheNomDeRecette.appendChild(recipeElement)
     } 
     }
+
 buttonValider.addEventListener("click",() => {
     // on masque le première page 
     document.getElementById("ingredientsPage").style.display ="none"
@@ -47,15 +47,15 @@ buttonValider.addEventListener("click",() => {
 
     const selectedArray = Array.from(selectedIngredient); // Convertit le Set en tableau
     //console.log("Ingrédients choisis :", selectedArray)
-    const ingredientsGroupe = selectedArray.map((ingredient) => encodeURIComponent(ingredient)).join(",")
-    console.log("ingredient regroupée:",ingredientsGroupe)
-    console.log(remplaceIngredient(ingredientsGroupe))
-    displayRecipes(remplaceIngredient(ingredientsGroupe)) 
+    ingredientsGroupe = selectedArray.map((ingredient) => encodeURIComponent(ingredient)).join(",")
+    //console.log("ingredient regroupée:",ingredientsGroupe)
+    //console.log(remplaceIngredient(ingredientsGroupe))
+    displayRecipes(remplaceIngredient(ingredientsGroupe),3) 
     document.getElementById('texte').innerText = "Voici les plats possibles avec vos ingrédients"
     //console.log(recipesAleatoire(recipesResult))
 })
 buttonNouvelleRecette.addEventListener("click", ()=>{
-    displayRecipes(remplaceIngredient(ingredient))
+    displayRecipes(remplaceIngredient(ingredientsGroupe),6)
 })
 
 function remplaceIngredient(ingredientsChoisi){
