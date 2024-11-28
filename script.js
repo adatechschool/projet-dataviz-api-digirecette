@@ -1,6 +1,7 @@
 const buttonContainer = document.getElementById("buttonContainer")
 const buttonValider = document.getElementById("buttonValider")
 const afficheNomDeRecette = document.getElementById("nomDeRecette")
+const buttonNouvelleRecette = document.getElementById("nouvelleRecette")
 let selectedIngredient = new Set()
 
 let listeIngredients = ["carrots", "tomatoes", "steaks", "spagettis","potatoes", 
@@ -20,21 +21,24 @@ listeIngredients.forEach(ingredient => {
         console.log(Array.from(selectedIngredient))
     }) 
 })
+let recipesResult = ""
 async function displayRecipes (url){
     const recipesReponse = await fetch(url)
-    const recipesResult = await recipesReponse.json()
-    console.log(recipesResult)
+    recipesResult = await recipesReponse.json()
+    //console.log(recipesResult)
 
     afficheNomDeRecette.innerHTML=""
-    recipesResult.forEach(ingredient => {
+    //recipesResult.forEach(ingredient => {
+    //let indexDeTrois = recipesResult.length/4
+    for (let i = 0; i < 3; i++){
         const recipeElement = document.createElement('div')
         recipeElement.innerHTML =
         `<button>
-        <p>${ingredient.title}</p> 
-        <img src = "${ingredient.image}"/>
+        <p>${recipesResult[i].title}</p> 
+        <img src = "${recipesResult[i].image}"/>
         </button>`
     afficheNomDeRecette.appendChild(recipeElement)
-    }) 
+    } 
     }
 buttonValider.addEventListener("click",() => {
     // on masque le première page 
@@ -48,8 +52,13 @@ buttonValider.addEventListener("click",() => {
     console.log(remplaceIngredient(ingredientsGroupe))
     displayRecipes(remplaceIngredient(ingredientsGroupe)) 
     document.getElementById('texte').innerText = "Voici les plats possibles avec vos ingrédients"
+    //console.log(recipesAleatoire(recipesResult))
+})
+buttonNouvelleRecette.addEventListener("click", ()=>{
+    displayRecipes(remplaceIngredient(ingredient))
 })
 
 function remplaceIngredient(ingredientsChoisi){
-    return  `https://api.spoonacular.com/recipes/findByIngredients?ingredients=${ingredientsChoisi}&number=10&limitLicense=true&ranking=1&ignorePantry=false&apiKey=04aeff9c7aa54db4add1b4bf65923c49`
+    return  `https://api.spoonacular.com/recipes/findByIngredients?ingredients=${ingredientsChoisi}&number=12&limitLicense=true&ranking=1&ignorePantry=false&apiKey=04aeff9c7aa54db4add1b4bf65923c49`
 }
+//console.log(recipesAleatoire(recipesResult))
