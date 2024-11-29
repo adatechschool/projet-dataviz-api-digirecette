@@ -2,6 +2,7 @@ const buttonContainer = document.getElementById("buttonContainer")
 const buttonValider = document.getElementById("buttonValider")
 const afficheNomDeRecette = document.getElementById("nomDeRecette")
 const buttonNouvelleRecette = document.getElementById("nouvelleRecette")
+const buttonRetour = document.getElementById("buttonRetour")
 let selectedIngredient = new Set()
 
 let listeIngredients = ["carrots", "tomatoes", "steaks", "spagettis","potatoes", 
@@ -54,11 +55,25 @@ buttonValider.addEventListener("click",() => {
     document.getElementById('texte').innerText = "Voici les plats possibles avec vos ingrédients"
     //console.log(recipesAleatoire(recipesResult))
 })
+let nombreRecetteIndex = 3
 buttonNouvelleRecette.addEventListener("click", ()=>{
-    displayRecipes(remplaceIngredient(ingredientsGroupe),6)
+    nombreRecetteIndex+=3;
+    // console.log(nombreRecette, "ceci est un test")
+    if(nombreRecetteIndex<recipesResult.length){
+    displayRecipes(remplaceIngredient(ingredientsGroupe),nombreRecetteIndex)
+    }else if(nombreRecetteIndex = recipesResult.length){
+    buttonNouvelleRecette.style.display="none"
+    buttonRetour.style.display = "inline-block"
+    displayRecipes(remplaceIngredient(ingredientsGroupe),nombreRecetteIndex)
+    }else{
+    }
+})
+buttonRetour.addEventListener("click", () => {
+    document.getElementById("recipesPage").style.display="none"
+    document.getElementById("ingredientsPage").style.display ="inline-block"
 })
 
 function remplaceIngredient(ingredientsChoisi){
-    return  `https://api.spoonacular.com/recipes/findByIngredients?ingredients=${ingredientsChoisi}&number=12&limitLicense=true&ranking=1&ignorePantry=false&apiKey=04aeff9c7aa54db4add1b4bf65923c49`
+    return  `https://api.spoonacular.com/recipes/findByIngredients?ingredients=${ingredientsChoisi}&number=12&limitLicense=true&ranking=1&ignorePantry=false&apiKey=7061bca4946b450486a78ee6c6b7e398`
 }
 //console.log(recipesAleatoire(recipesResult))
