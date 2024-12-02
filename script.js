@@ -3,6 +3,7 @@ const buttonValider = document.getElementById("buttonValider")
 const afficheNomDeRecette = document.getElementById("nomDeRecette")
 const buttonNouvelleRecette = document.getElementById("nouvelleRecette")
 const buttonRetour = document.getElementById("buttonRetour")
+const frigidaire = document.getElementById("frigo")
 let selectedIngredient = new Set()
 
 let listeIngredients = {
@@ -20,6 +21,10 @@ let listeIngredients = {
 {text:"flour", image:"images/flour.png"},
 {text:"cucumber", image:"images/cucumber.png"}
 ]}
+let imagesFrigo = [,
+    {title:"frigo_fermé", image:"images/frigo-fermé.png"},
+    {title:"frigo_ouvert", image:"images/frigo-ouvert.png"}
+]
 listeIngredients.ingredients.forEach(ingredient => {
     const optionIngredient = document.createElement('button')
     optionIngredient.innerHTML = `<img src = "${ingredient.image}" class= "ingredients"/>`
@@ -64,6 +69,10 @@ buttonValider.addEventListener("click",() => {
     displayRecipes(remplaceIngredient(ingredientsGroupe),3) 
     document.getElementById('texte').innerText = "Voici les plats possibles avec vos ingrédients"
 })
+frigidaire.addEventListener('click', function () {
+    frigidaire.src = "images/frigo-ouvert.png";
+    frigidaire.style= "width: 400px"
+  })
 let nombreRecetteIndex = 3
 buttonNouvelleRecette.addEventListener("click", ()=>{
     nombreRecetteIndex += 3
