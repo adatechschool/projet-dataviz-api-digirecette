@@ -1,5 +1,5 @@
 const buttonContainer = document.getElementById("buttonContainer")
-const buttonValider = document.getElementById("buttonValider")
+const buttonCook = document.getElementById("buttonValider")
 const afficheNomDeRecette = document.getElementById("nomDeRecette")
 const buttonNouvelleRecette = document.getElementById("nouvelleRecette")
 const buttonRetour = document.getElementById("buttonRetour")
@@ -21,16 +21,14 @@ let listeIngredients = {
 {text:"flour", image:"images/flour.png"},
 {text:"cucumber", image:"images/cucumber.png"}
 ]}
-let imagesFrigo = [,
-    {title:"frigo_fermé", image:"images/frigo-fermé.png"},
-    {title:"frigo_ouvert", image:"images/frigo-ouvert.png"}
-]
+buttonCook.disabled = true
 listeIngredients.ingredients.forEach(ingredient => {
     const optionIngredient = document.createElement('button')
     optionIngredient.innerHTML = `<img src = "${ingredient.image}" class= "ingredients"/>`
     buttonContainer.appendChild(optionIngredient)
 
     optionIngredient.addEventListener("click", () => {
+        buttonCook.disabled = false
         //console.log(optionIngredient.innerText)
         if (selectedIngredient.has(ingredient.text)) {
             selectedIngredient.delete(ingredient.text)
@@ -57,7 +55,7 @@ async function displayRecipes (url,nombreDeRecette){
     afficheNomDeRecette.appendChild(recipeElement)
     } 
     }
-buttonValider.addEventListener("click",() => {
+buttonCook.addEventListener("click",() => {
     // on masque le première page 
     document.getElementById("ingredientsPage").style.display ="none"
     document.getElementById("recipesPage").style.display="inline-block"
@@ -88,6 +86,7 @@ buttonNouvelleRecette.addEventListener("click", ()=>{
     }
 })
 buttonRetour.addEventListener("click", () => {
+    buttonCook.disabled = true
     document.getElementById("ingredientsPage").style.display ="inline-block"
     document.getElementById("recipesPage").style.display="none"
 })
