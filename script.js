@@ -41,13 +41,13 @@ listeIngredients.ingredients.forEach(ingredient => {
     }) 
 })
 let recipesResult = ""
-async function displayRecipes (url,index){
+async function displayRecipes (url,nombreDeRecette){
     const recipesReponse = await fetch(url)
     recipesResult = await recipesReponse.json()
     //console.log(recipesResult)
     afficheNomDeRecette.innerHTML=""
 
-    for (let i = 0; i < index; i++){
+    for (let i = nombreDeRecette-3; i < nombreDeRecette; i++){
         const recipeElement = document.createElement('div')
         recipeElement.innerHTML =
         `<button>
@@ -77,8 +77,10 @@ let nombreRecetteIndex = 3
 buttonNouvelleRecette.addEventListener("click", ()=>{
     nombreRecetteIndex += 3
     if (nombreRecetteIndex < recipesResult.length){
+        afficheNomDeRecette.innerHTML=""
         displayRecipes(remplaceIngredient(ingredientsGroupe),nombreRecetteIndex)
     }else if(nombreRecetteIndex = recipesResult.length){
+        afficheNomDeRecette.innerHTML=""
         buttonNouvelleRecette.style.display = "none"
         buttonRetour.style.display = "inline-block"
         displayRecipes(remplaceIngredient(ingredientsGroupe),nombreRecetteIndex)
