@@ -46,13 +46,13 @@ async function displayRecipes (url,nombreDeRecette){
     afficheNomDeRecette.innerHTML=""
 
     for (let i = nombreDeRecette-3; i < nombreDeRecette; i++){
-        const recipeElement = document.createElement('div')
+        const recipeElement = document.createElement('button')
         recipeElement.innerHTML =
-        `<button>
-        <p>${recipesResult[i].title}</p> 
+        `<p>${recipesResult[i].title}</p> 
         <img src = "${recipesResult[i].image}"/>
-        </button>`
+        `
     afficheNomDeRecette.appendChild(recipeElement)
+    recipeElement.classList.add("recipeElementContainer")
     } 
     }
 buttonCook.addEventListener("click",() => {
@@ -91,5 +91,5 @@ buttonRetour.addEventListener("click", () => {
     document.getElementById("recipesPage").style.display="none"
 })
 function remplaceIngredient(ingredientsChoisi){
-    return  `https://api.spoonacular.com/recipes/findByIngredients?ingredients=${ingredientsChoisi}&number=12&limitLicense=true&ranking=1&ignorePantry=false&apiKey=04aeff9c7aa54db4add1b4bf65923c49`
+    return  `https://api.spoonacular.com/recipes/findByIngredients?ingredients=${ingredientsChoisi}&number=12&limitLicense=true&ranking=1&ignorePantry=false&apiKey=7061bca4946b450486a78ee6c6b7e398`
 }
