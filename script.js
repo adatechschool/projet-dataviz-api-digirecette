@@ -3,8 +3,11 @@ const buttonCook = document.getElementById("buttonValider")
 const afficheNomDeRecette = document.getElementById("nomDeRecette")
 const buttonNouvelleRecette = document.getElementById("nouvelleRecette")
 const buttonRetour = document.getElementById("buttonRetour")
-const frigidaire = document.getElementById("frigo")
+const fridgeOpenningToggle = document.getElementById("frigo")
+const apiKey = "2d65b549176d4a439deba01412837ab9"
+const recipePerPage = 3
 let selectedIngredient = new Set()
+let currentRecipes = new Array()
 
 let listeIngredients = {
     ingredients: [
@@ -38,23 +41,6 @@ listeIngredients.ingredients.forEach(ingredient => {
         console.log(Array.from(selectedIngredient))
     }) 
 })
-let recipesResult = ""
-async function displayRecipes (url,nombreDeRecette){
-    const recipesReponse = await fetch(url)
-    recipesResult = await recipesReponse.json()
-    //console.log(recipesResult)
-    afficheNomDeRecette.innerHTML=""
-
-    for (let i = nombreDeRecette-3; i < nombreDeRecette; i++){
-        const recipeElement = document.createElement('button')
-        recipeElement.innerHTML =
-        `<p>${recipesResult[i].title}</p> 
-        <img src = "${recipesResult[i].image}"/>
-        `
-    afficheNomDeRecette.appendChild(recipeElement)
-    recipeElement.classList.add("recipeElementContainer")
-    } 
-    }
 buttonCook.addEventListener("click",() => {
     // on masque le première page 
     document.getElementById("ingredientsPage").style.display ="none"
@@ -64,32 +50,69 @@ buttonCook.addEventListener("click",() => {
     console.log("Ingrédients choisis :", selectedArray)
     ingredientsGroupe = selectedArray.map((ingredient) => encodeURIComponent(ingredient)).join(",")
     console.log("ingredient regroupée:",ingredientsGroupe)
-    displayRecipes(remplaceIngredient(ingredientsGroupe),3) 
+    
+    //currentRecipes = remplaceIngredient(ingredientsGroupe)
+    // displayRecipes(remplaceIngredient(ingredientsGroupe),0) 
     document.getElementById('texte').innerText = "Voici les plats possibles avec vos ingrédients"
+    loadRecipes(ingredientsGroupe)
 })
-frigidaire.addEventListener('click', function () {
-    frigidaire.src = "images/frigo-ouvert.png";
-    frigidaire.style= "width: 400px"
-  })
-let nombreRecetteIndex = 3
+let isFridgeOpen = false
+fridgeOpenningToggle.addEventListener('click',() => {
+    if(isFridgeOpen){
+        fridgeOpenningToggle.src = "images/frigo-fermé.png"
+        fridgeOpenningToggle.style= "width: 220px"
+        isFridgeOpen = false
+    } else {
+        fridgeOpenningToggle.src = "images/frigo-ouvert.png";
+        fridgeOpenningToggle.style= "width: 400px"
+        isFridgeOpen = true
+  }
+})
+let recipePageIndex = 0
 buttonNouvelleRecette.addEventListener("click", ()=>{
-    nombreRecetteIndex += 3
-    if (nombreRecetteIndex < recipesResult.length){
-        afficheNomDeRecette.innerHTML=""
-        displayRecipes(remplaceIngredient(ingredientsGroupe),nombreRecetteIndex)
-    }else if(nombreRecetteIndex = recipesResult.length){
-        afficheNomDeRecette.innerHTML=""
+    recipePageIndex++
+    let pageMinIndex = recipePageIndex * recipePerPage
+    let pageMaxIndex = (recipePageIndex + 1) * recipePerPage
+    if (pageMaxIndex < currentRecipes.length){
+        displayRecipes()
+        buttonNouvelleRecette.style.display = "inline-block"
+        buttonRetour.style.display = "none"
+    } else {
+        displayRecipes()
         buttonNouvelleRecette.style.display = "none"
         buttonRetour.style.display = "inline-block"
-        displayRecipes(remplaceIngredient(ingredientsGroupe),nombreRecetteIndex)
-    } else {
     }
 })
 buttonRetour.addEventListener("click", () => {
     buttonCook.disabled = true
-    document.getElementById("ingredientsPage").style.display ="inline-block"
-    document.getElementById("recipesPage").style.display="none"
+    document.getElementById("ingredientsPage").style.display = "inline-block"
+    document.getElementById("recipesPage").style.display = "none"
+    buttonNouvelleRecette.style.display = "inline-block"
+    buttonRetour.style.display = "none"
 })
-function remplaceIngredient(ingredientsChoisi){
-    return  `https://api.spoonacular.com/recipes/findByIngredients?ingredients=${ingredientsChoisi}&number=12&limitLicense=true&ranking=1&ignorePantry=false&apiKey=7061bca4946b450486a78ee6c6b7e398`
+
+async function loadRecipes(ingredientsChoisi) {
+    let url = `https://api.spoonacular.com/recipes/findByIngredients?ingredients=${ingredientsChoisi}&number=12&limitLicense=true&ranking=1&ignorePantry=false&apiKey=${apiKey}`
+    const recipesReponse = await fetch(url)
+    currentRecipes = await recipesReponse.json()
+    console.log(currentRecipes)
+    recipePageIndex = 0
+
+    afficheNomDeRecette.innerHTML=""
+    console.log(currentRecipes)
+    displayRecipes()
+}
+
+function displayRecipes() {
+    afficheNomDeRecette.innerHTML = ""
+    console.log(recipePageIndex)
+    for (let i = recipePageIndex * recipePerPage; (i < currentRecipes.length) && (i < (recipePageIndex + 1) * recipePerPage); i++){
+        const recipeElement = document.createElement('button')
+        recipeElement.innerHTML = 
+        `<p>${currentRecipes[i].title}</p> 
+        <img src = "${currentRecipes[i].image}"/>
+        `
+        afficheNomDeRecette.appendChild(recipeElement)
+        recipeElement.classList.add("recipeElementContainer")
+    } 
 }
