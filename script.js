@@ -38,9 +38,11 @@ listeIngredients.ingredients.forEach((ingredient, index) => {
     
     optionIngredient.addEventListener("click", () => {
         buttonCook.disabled = false
+        optionIngredient.classList.add("check")
             //console.log(optionIngredient.innerText)
         if (selectedIngredient.has(ingredient.text)) {
             selectedIngredient.delete(ingredient.text)
+            optionIngredient.classList.remove("check")
         } else {
             selectedIngredient.add(ingredient.text)
         }
