@@ -1,31 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>DigiRecette</title>
-    <script defer src="script.js"></script>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script defer src ="data.js"></script>
     <link rel="stylesheet" href="style.css">
-  </head>
-  <body>
+</head>
+<body>
     <div id="ingredientsPage" class="page">
-      <div id="buttonContainer"></div>
-      <button id="buttonValider">Let's cook</button>
-    <div id="frigoContainer">
-      <img id="frigo" src="images/frigo-fermé.png"/>
-    </div>
+        <div id = "imageContainer">
+         <img id="frigo" src="images/frigo-fermé.png">
+        </div>
+            
+        </img>
+        <div id = "frigoContainer">
+            <div id="buttonContainer"></div>
+        </div>
+        <div id = "frigoContainer2">
+            <div id="buttonContainer2"></div>
+        </div>
+        <div id = "frigoContainer3">
+            <div id="buttonContainer3"></div>
+        </div>
+        <button id="buttonValider">Let's cook</button>
     </div>
 
-
-<div id = "recipesPage" class = "page" style = "display:none"> 
-<h2 id ="texte"> </h2>
-    <div id = "nomDeRecette"></div>
-    <div>
-        <button id ="nouvelleRecette">Nouvelle recette</button>
-        <div class="box-buttonRetour">
-          <button id="buttonRetour" style="display: none;">Retour</button>
-    </div>
-    </div>
-</div>
-  </body>
+  <div id = "recipesPage" class = "page" style = "display:none"> 
+        <h2 id = "texte"> </h2>
+        <span class ="loader" id = "loading"></span>
+      <div id = "recetteContainer"></div>
+      <div>
+          <button id ="nouvelleRecette">Nouvelle recette</button>
+          <div class="box-buttonRetour">
+            <button id="buttonRetour" style="display: none;">Retour</button>
+          </div>
+      </div>
+  </div>
+</body>
 </html>
