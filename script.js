@@ -74,7 +74,7 @@ fridgeOpenningToggle.addEventListener('click',() => {
         })
         
     } else {
-        fridgeOpenningToggle.src = "images/frigo-ouvert3.png";
+        fridgeOpenningToggle.src = "images/frigo-ouvert4.png";
         fridgeOpenningToggle.style= "width: 870px"
         isFridgeOpen = true
         buttonContainers.forEach(container => {

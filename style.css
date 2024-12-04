@@ -2,6 +2,7 @@
   top: 0px;
   left: 0px;
   position: fixed;
+  margin-top: 0;
 }
 .ingredients {
     height: 50px;
@@ -22,17 +23,25 @@
     transform: scale(1.1);
 }
 body {
-    height: 100vh;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    min-height: 100vh;
+    /*height: 100vh;*/
     /*width: auto;*/
     max-width: 100%;
-    display: flex;
+    /*display: flex;
     margin: 0;
     justify-content: center;
-    align-items: center;
+    align-items: center;*/
     font-family: BalooBhai, sans-serif;
     background: url(images/background-coupé.png);
     background-repeat: no-repeat;
     background-size: cover;
+    top: 10px;
 }
 #ingredientPage{
     display: flex;
@@ -40,27 +49,32 @@ body {
     justify-content: center;
     align-items: center;
 }
+#recipesPage{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 #frigo{
     
-    height: 800px;
-    width: 500px;
+    height: 900px;
+    width: 650px;
 }
 
 #frigoContainer2{
     position: absolute;
-    top: 45%;
-    padding-left: 70px;
+    top: 51%;
+    padding-left: 38px;
 }
 #frigoContainer3{
     position: absolute;
-    top: 50%;
-    padding-left: 70px;
+    top: 60%;
+    padding-left: 38px;
 }
 #frigoContainer{
     /*display: flex;*/
     position: absolute;
     top: 32%;
-    padding-left: 70px;
+    padding-left: 38px;
     /*justify-content: center;*/
     /*align-items: center;*/
     /*height: 100vh;*/
@@ -79,12 +93,16 @@ body {
     /* 3 colonnes */
     grid-template-columns: 1fr 1fr 1fr;
     /*Espace entre les divs */
-    gap: 20px;
-    margin-top: 20px;
+    gap: 30px;
+    margin-right: 150px;
+    margin-bottom: 300px;
 }
 #texte {
+    display: flex;
     justify-content: center;
     align-items: center;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 35px;
 }
 .recipeElementContainer{
     height: 350px;
@@ -101,25 +119,25 @@ body {
     position: absolute;
 }*/
 #imageContainer{
-    position: relative;
+    /*position: relative;*/
+    display: flex;
+    justify-content: center; /* Centre horizontalement */
+    align-items: flex-start; /* Aligne en haut */
+    margin-bottom: 100px; /* Ajuste pour monter un peu */
+    width: 100%; /* S'assure qu'il prend toute la largeur pour centrer */
 }
 #buttonContainer img{
-    height: 50px;
-    width: 50px;
+    height: 75px;
+    width: 75px;
 }
 #buttonContainer2 img{
-    height: 50px;
-    width: 50px;
+    height: 75px;
+    width: 75px;
 }
 #buttonContainer3 img{
-    height: 50px;
-    width: 50px;
+    height: 75px;
+    width: 75px;
     
-}
-#placeCarrots{
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 .loader {
     width: 100px;
@@ -177,16 +195,22 @@ body {
         background-position: -2px -4px , 2px 2px , 1px 1px;
      }
   }
-  #buttonValider{
+  #buttonValider,#buttonRetour,#nouvelleRecette{
     background-color: #ea923a;
     color: #ffffff;
     border: none;
     padding: 10px 20px;
-    font-size: 20px;
+    font-size: 30px;
     font-family: BalooBhai, sans-serif;
-    border-radius: 5px;
+    border-radius: 20px;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease;
-    margin-left: 120%;
-}
-    
+    position: fixed; /* Fixe le bouton par rapport à la fenêtre */
+    bottom: 320px; /* Distance par rapport au haut de l'écran */
+    right: 500px; /* Distance par rapport à la droite de l'écran */
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    height: 90px;
+    width: 200px;
+}  
