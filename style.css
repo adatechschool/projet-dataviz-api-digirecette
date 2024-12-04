@@ -44,7 +44,7 @@ body {
     justify-content: center;
     align-items: center;*/
     font-family: BalooBhai, sans-serif;
-    background: url(images/background-coupé.png);
+    background: url(images/background4.png);
     background-repeat: no-repeat;
     background-size: cover;
     top: 10px;
@@ -217,6 +217,6 @@ body {
     padding: 10px 20px;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease;
-    height: 90px;
+    height: 80px;
     width: 200px;
 }  

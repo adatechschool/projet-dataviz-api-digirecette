@@ -35,7 +35,7 @@ listeIngredients.ingredients.forEach((ingredient, index) => {
     optionIngredient.innerHTML = `<img src = "${ingredient.image}" class= "${ingredient.text}"/>`
     container.appendChild(optionIngredient)
         //ingredient.classList.add("carrots","tomatoes","steaks","spagettis","potatoes","fish","butter","egg york","broccoli","olives","flour","cucumber")
-    
+    buttonCook.style.display ="none"
     optionIngredient.addEventListener("click", () => {
         buttonCook.disabled = false
         optionIngredient.classList.add("check")
@@ -59,7 +59,7 @@ buttonCook.addEventListener("click",() => {
     //console.log("Ingrédients choisis :", selectedArray)
     ingredientsGroupe = selectedArray.map((ingredient) => encodeURIComponent(ingredient)).join(",")
     //console.log("ingredient regroupée:",ingredientsGroupe)
-    document.getElementById('texte').innerText = "Voici les plats possibles avec vos ingrédients"
+    document.getElementById('texte').innerText = "Bon appétit !!!"
     loadRecipes(ingredientsGroupe)
 })
 buttonContainers.forEach(container => {
@@ -70,6 +70,7 @@ fridgeOpenningToggle.addEventListener('click',() => {
     if(isFridgeOpen){
         fridgeOpenningToggle.src = "images/frigo-fermé.png"
         fridgeOpenningToggle.style= "width: 500px"
+        //buttonCook.style.display = "none"
         isFridgeOpen = false
         buttonContainers.forEach(container => {
             container.style.display ="none"
@@ -79,6 +80,7 @@ fridgeOpenningToggle.addEventListener('click',() => {
         fridgeOpenningToggle.src = "images/frigo-ouvert4.png";
         fridgeOpenningToggle.style= "width: 870px"
         isFridgeOpen = true
+        //buttonCook.style.display = "inline-block"
         buttonContainers.forEach(container => {
             container.style.display ="inline-block"
         })
@@ -105,6 +107,7 @@ buttonRetour.addEventListener("click", () => {
     document.getElementById("recipesPage").style.display = "none"
     buttonNouvelleRecette.style.display = "inline-block"
     buttonRetour.style.display = "none"
+    buttonCook.style.display ="none"
 })
 
 async function loadRecipes(ingredientsChoisi) {
