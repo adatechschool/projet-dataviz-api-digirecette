@@ -1,3 +1,8 @@
+#logo{
+  top: 0px;
+  left: 0px;
+  position: fixed;
+}
 .ingredients {
     height: 50px;
     width: 50px;
