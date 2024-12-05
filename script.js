@@ -38,6 +38,7 @@ listeIngredients.ingredients.forEach((ingredient, index) => {
     buttonCook.style.display ="none"
     optionIngredient.addEventListener("click", () => {
         buttonCook.disabled = false
+        buttonCook.style.display = "inline-block"
         optionIngredient.classList.add("check")
             //console.log(optionIngredient.innerText)
         if (selectedIngredient.has(ingredient.text)) {
@@ -48,7 +49,6 @@ listeIngredients.ingredients.forEach((ingredient, index) => {
         }
         console.log(Array.from(selectedIngredient))
     }) 
-    
 })
 buttonCook.addEventListener("click",() => {
     // on masque le première page 
@@ -108,6 +108,12 @@ buttonRetour.addEventListener("click", () => {
     buttonNouvelleRecette.style.display = "inline-block"
     buttonRetour.style.display = "none"
     buttonCook.style.display ="none"
+    selectedIngredient.clear()
+    buttonContainers.forEach( container => {
+        for (const child of container.children) {
+            child.classList.remove("check")
+        }
+    })
 })
 
 async function loadRecipes(ingredientsChoisi) {
