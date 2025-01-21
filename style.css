@@ -68,23 +68,19 @@ body {
 
 #frigoContainer2{
     position: absolute;
-    top: 51%;
+    top: 42%;
     padding-left: 38px;
 }
 #frigoContainer3{
     position: absolute;
-    top: 60%;
+    top: 52%;
     padding-left: 38px;
 }
 #frigoContainer{
     /*display: flex;*/
     position: absolute;
-    top: 32%;
+    top: 19%;
     padding-left: 38px;
-    /*justify-content: center;*/
-    /*align-items: center;*/
-    /*height: 100vh;*/
-    /*position: relative;*/
 }
 
 
@@ -108,7 +104,8 @@ body {
     justify-content: center;
     align-items: center;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    font-size: 35px;
+    font-size: 38px;
+    transform: translateY(-40px)
 }
 .recipeElementContainer{
     height: 350px;

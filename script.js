@@ -27,17 +27,16 @@ let listeIngredients = {
 {text:"flour", image:"images/flour.png"},
 {text:"cucumber", image:"images/cucumber.png"}
 ]}
-buttonCook.disabled = true
+//buttonCook.disabled = true
 let buttonContainers = [buttonContainer, buttonContainer2, buttonContainer3]
 listeIngredients.ingredients.forEach((ingredient, index) => {
     let container = buttonContainers[index % 3]
     const optionIngredient = document.createElement('button')
     optionIngredient.innerHTML = `<img src = "${ingredient.image}" class= "${ingredient.text}"/>`
     container.appendChild(optionIngredient)
-        //ingredient.classList.add("carrots","tomatoes","steaks","spagettis","potatoes","fish","butter","egg york","broccoli","olives","flour","cucumber")
     buttonCook.style.display ="none"
     optionIngredient.addEventListener("click", () => {
-        buttonCook.disabled = false
+        //buttonCook.disabled = false
         buttonCook.style.display = "inline-block"
         optionIngredient.classList.add("check")
             //console.log(optionIngredient.innerText)
@@ -102,7 +101,7 @@ buttonNouvelleRecette.addEventListener("click", ()=>{
     }
 })
 buttonRetour.addEventListener("click", () => {
-    buttonCook.disabled = true
+    //buttonCook.disabled = true
     document.getElementById("ingredientsPage").style.display = "inline-block"
     document.getElementById("recipesPage").style.display = "none"
     buttonNouvelleRecette.style.display = "inline-block"
@@ -118,7 +117,7 @@ buttonRetour.addEventListener("click", () => {
 
 async function loadRecipes(ingredientsChoisi) {
     loader.style.display = "inline-block"
-    let url = `https://api.spoonacular.com/recipes/findByIngredients?ingredients=${ingredientsChoisi}&number=12&limitLicense=true&ranking=1&ignorePantry=false&apiKey=${apiKey}`
+    let url = `https://api.spoonacular.com/recipes/findByIngredients?ingredients=${ingredientsChoisi}&number=18&limitLicense=true&ranking=1&ignorePantry=false&apiKey=${apiKey}`
     const recipesReponse = await fetch(url)
     currentRecipes = await recipesReponse.json()
     loader.style.display = "none"
