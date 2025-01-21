@@ -210,7 +210,7 @@ body {
     transition: background-color 0.3s ease, transform 0.2s ease;
     position: fixed; /* Fixe le bouton par rapport à la fenêtre */
     bottom: 320px; /* Distance par rapport au haut de l'écran */
-    right: 500px; /* Distance par rapport à la droite de l'écran */
+    right: 300px; /* Distance par rapport à la droite de l'écran */
     padding: 10px 20px;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease;
